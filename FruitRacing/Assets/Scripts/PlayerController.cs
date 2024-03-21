@@ -7,8 +7,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;
     private float speed = 500;
     private GameObject focalPoint;
+    private Renderer render;
+    private Color originalColor;
+
+    public bool gotPowerUp;
     void Start()
     {
+        render = GetComponent<Renderer>();
         playerRb = GetComponent<Rigidbody>();
         focalPoint = GameObject.Find("Focal Point");
 
@@ -20,5 +25,28 @@ public class PlayerController : MonoBehaviour
         playerRb.AddForce(focalPoint.transform.forward * verticalInput * speed * Time.deltaTime);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+            if (other.CompareTag("powerUp"))
+        {
+            gotPowerUp = true;
+            Destroy(other.gameObject);
+            StartCoroutine(changeColor());
+        }
+    }
 
+    /*private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("powerUp") && gotPowerUp)
+        {
+            playerRb.AddForce(gotPowerUp* speed,force.Impulse)
+        }
+    }*/
+    IEnumerator changeColor()
+    {
+        originalColor = render.material.color;
+        render.material.color = Color.blue;
+        yield return new WaitForSeconds(3);
+        render.material.color = originalColor;
+    }
 }
