@@ -16,14 +16,14 @@ public class PlayerController : MonoBehaviour
     {
         render = GetComponent<Renderer>();
         playerRb = GetComponent<Rigidbody>();
-        focalPoint = GameObject.Find("Focal Point");
+        //focalPoint = GameObject.Find("Focal Point");
 
     }
     void Update()
     {
         // Add force to player in direction of the focal point (and camera)
         float verticalInput = Input.GetAxis("Vertical");
-        playerRb.AddForce(focalPoint.transform.forward * verticalInput * speed * Time.deltaTime);
+        playerRb.AddForce(transform.forward * verticalInput * speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
