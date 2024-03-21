@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private Renderer render;
     private Color originalColor;
 
+    public ParticleSystem dustCloud;
     public bool gotPowerUp;
     void Start()
     {
@@ -30,8 +31,10 @@ public class PlayerController : MonoBehaviour
             if (other.CompareTag("powerUp"))
         {
             gotPowerUp = true;
+            dustCloud.Play();
             Destroy(other.gameObject);
             StartCoroutine(changeColor());
+
         }
     }
 
@@ -45,8 +48,9 @@ public class PlayerController : MonoBehaviour
     IEnumerator changeColor()
     {
         originalColor = render.material.color;
-        render.material.color = Color.blue;
+        render.material.color = Color.yellow;
         yield return new WaitForSeconds(3);
         render.material.color = originalColor;
+        dustCloud.Stop();
     }
 }
