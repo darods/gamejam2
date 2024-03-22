@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     private Renderer render;
     private Color originalColor;
 
-    public ParticleSystem dustCloud;
+    //public ParticleSystem dustCloud;
     public bool gotPowerUp;
     public GameObject onFire;
     void Start()
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
         playerRb.AddForce(focalPoint.transform.forward * verticalInput * speed * Time.deltaTime);
         onFire.transform.position = transform.position;
-        dustCloud.transform.position = transform.position;
+        //dustCloud.transform.position = transform.position;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         {
             gotPowerUp = true;
             onFire.gameObject.SetActive(true);
-            dustCloud.Play();
+            //dustCloud.Play();
             Destroy(other.gameObject);
             StartCoroutine(changeColor());
 
@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
         render.material.color = Color.blue;
         yield return new WaitForSeconds(3);
         render.material.color = originalColor;
-        dustCloud.Stop();
+        //dustCloud.Stop();
         onFire.gameObject.SetActive(false);
     }
 }
