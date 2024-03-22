@@ -22,7 +22,7 @@ public class MovementOponent : MonoBehaviour
     void Update()
     {
         // Si el agente ha llegado a su destino actual, establece el siguiente punto de destino
-        if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.1f)
+        if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 1f)
         {
             SetNextWaypoint();
         }
