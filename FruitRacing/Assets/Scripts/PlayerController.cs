@@ -7,17 +7,20 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;
     private float speed = 500;
     private GameObject focalPoint;
+    private GameObject fruit;
     private Renderer render;
     private Color originalColor;
 
-    //public ParticleSystem dustCloud;
+    public ParticleSystem dustCloud;
     public bool gotPowerUp;
     public GameObject onFire;
     void Start()
     {
-        render = GetComponent<Renderer>();
+        
         playerRb = GetComponent<Rigidbody>();
         focalPoint = GameObject.Find("Focal Point");
+        fruit = GameObject.Find("coco");
+        render = fruit.GetComponent<Renderer>();
 
     }
     void Update()
@@ -26,7 +29,7 @@ public class PlayerController : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
         playerRb.AddForce(focalPoint.transform.forward * verticalInput * speed * Time.deltaTime);
         onFire.transform.position = transform.position;
-        //dustCloud.transform.position = transform.position;
+        dustCloud.transform.position = transform.position;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -35,27 +38,22 @@ public class PlayerController : MonoBehaviour
         {
             gotPowerUp = true;
             onFire.gameObject.SetActive(true);
-            //dustCloud.Play();
+            dustCloud.Play();
             Destroy(other.gameObject);
-            StartCoroutine(changeColor());
+            StartCoroutine(activatePowerUp());
 
         }
     }
 
-    /*private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("powerUp") && gotPowerUp)
-        {
-            playerRb.AddForce(gotPowerUp* speed,force.Impulse)
-        }
-    }*/
-    IEnumerator changeColor()
+    IEnumerator activatePowerUp()
     {
         originalColor = render.material.color;
+        speed *= 3; // multiply by 3 the speed
         render.material.color = Color.blue;
         yield return new WaitForSeconds(3);
+        speed /= 3; // set normal speed again
         render.material.color = originalColor;
-        //dustCloud.Stop();
+        dustCloud.Stop();
         onFire.gameObject.SetActive(false);
     }
 }
