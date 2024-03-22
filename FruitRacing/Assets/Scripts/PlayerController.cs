@@ -40,23 +40,18 @@ public class PlayerController : MonoBehaviour
             onFire.gameObject.SetActive(true);
             dustCloud.Play();
             Destroy(other.gameObject);
-            StartCoroutine(changeColor());
+            StartCoroutine(activatePowerUp());
 
         }
     }
 
-    /*private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("powerUp") && gotPowerUp)
-        {
-            playerRb.AddForce(gotPowerUp* speed,force.Impulse)
-        }
-    }*/
-    IEnumerator changeColor()
+    IEnumerator activatePowerUp()
     {
         originalColor = render.material.color;
+        speed *= 3; // multiply by 3 the speed
         render.material.color = Color.blue;
         yield return new WaitForSeconds(3);
+        speed /= 3; // set normal speed again
         render.material.color = originalColor;
         dustCloud.Stop();
         onFire.gameObject.SetActive(false);
