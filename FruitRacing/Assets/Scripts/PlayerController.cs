@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
         focalPoint = GameObject.Find("Focal Point");
         fruit = GameObject.Find("coco");
         render = fruit.GetComponent<Renderer>();
+        onFire = GameObject.Find("onFire");
 
     }
     void Update()

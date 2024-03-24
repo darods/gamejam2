@@ -76,7 +76,6 @@ public class AudioManager : MonoBehaviour
         {
             if (slider.name == "SliderMusica")
             {
-                Debug.Log("entre");
                 sliderMusica = slider;
             }
             else
