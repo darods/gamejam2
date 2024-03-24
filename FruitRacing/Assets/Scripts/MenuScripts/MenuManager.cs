@@ -33,7 +33,7 @@ public class MenuManager : MonoBehaviour
 
     public void StartLevel2()
     {
-
+        SceneManager.LoadScene("Level 2 Test");
     }
 
     public void StartLevel3()
