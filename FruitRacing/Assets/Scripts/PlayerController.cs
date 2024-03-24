@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
         fruit = GameObject.Find("coco");
         render = fruit.GetComponent<Renderer>();
         onFire = GameObject.Find("onFire");
+        onFire.gameObject.SetActive(false);
 
     }
     void Update()
