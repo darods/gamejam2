@@ -14,6 +14,11 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem dustCloud;
     public bool gotPowerUp;
     public GameObject onFire;
+
+    public float playerDistance;
+    public GameObject[] points;
+    public PositionManager master;
+
     void Start()
     {
         
@@ -30,6 +35,7 @@ public class PlayerController : MonoBehaviour
         playerRb.AddForce(focalPoint.transform.forward * verticalInput * speed * Time.deltaTime);
         onFire.transform.position = transform.position;
         dustCloud.transform.position = transform.position;
+        FindDistance();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -55,5 +61,10 @@ public class PlayerController : MonoBehaviour
         render.material.color = originalColor;
         dustCloud.Stop();
         onFire.gameObject.SetActive(false);
+    }
+
+    public void FindDistance()
+    {
+        playerDistance = Vector3.Distance(points[master.currentPoint].transform.position, transform.position);
     }
 }

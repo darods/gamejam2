@@ -11,14 +11,12 @@ public class PauseManager : MonoBehaviour
     Canvas canvasMenuPause;
     GameObject panelPause;
     Button pauseButton;
-    AudioManager audioManager;
   
 
 
     // Start is called before the first frame update
     void Start()
     {
-        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         canvasMenuPause = FindObjectOfType<Canvas>();
         AssignElements();
         panelPause.SetActive(false);
@@ -67,6 +65,7 @@ public class PauseManager : MonoBehaviour
     public void GoingToMain()
     {
         SetTimeScale(1.0f);
+        AudioManager.Instance.musicSource.Stop();
         SceneManager.LoadScene("Menu");
     }
 
