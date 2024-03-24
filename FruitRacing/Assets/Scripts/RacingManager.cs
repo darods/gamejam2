@@ -26,14 +26,13 @@ public class RacingManager : MonoBehaviour
     }
     
     void OnTriggerEnter(Collider other){
-        Debug.Log(other.name);
         if(other.CompareTag("Player"))
         {
             timesPLayer++;
 
         }else if(other.CompareTag("Enemy"))
         {
-            Debug.Log("entre");
+
             timesEnemy++;
         }
     }

@@ -9,6 +9,9 @@ public class MovementOponent : MonoBehaviour
     private GameObject[] waypoints= new GameObject[6];
     int currentWaypointIndex = 0;
     private Rigidbody rb;
+    public PositionManager master;
+    public float aiDistance;
+    public GameObject[] points;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +30,7 @@ public class MovementOponent : MonoBehaviour
             SetNextWaypoint();
         }
 
+        FindDistance();
         // transform.Rotate(Vector3.forward, 30.0f * Time.deltaTime);
     }
 
@@ -50,5 +54,10 @@ public class MovementOponent : MonoBehaviour
         {
             waypoints[i] = GameObject.Find("WayPoint_" + i);
         }
+    }
+
+    public void FindDistance()
+    {
+        aiDistance = Vector3.Distance(points[master.currentPoint].transform.position, transform.position);
     }
 }
