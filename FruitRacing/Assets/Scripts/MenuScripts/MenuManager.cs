@@ -38,7 +38,7 @@ public class MenuManager : MonoBehaviour
 
     public void StartLevel3()
     {
-
+        SceneManager.LoadScene("Level 3 Test");
     }
 
     public void ChangeMenu()

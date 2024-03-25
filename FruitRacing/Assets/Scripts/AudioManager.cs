@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
@@ -9,6 +10,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
     public Sound[] musicSounds, sfxSounds;
     public AudioSource musicSource, sfxSource;
+
 
     private void Awake()
     {
@@ -20,11 +22,29 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
     }
 
     private void Start()
     {
-        PlayMusic("Chunky_Monkey");
+
+        // string sceneName = SceneManager.GetActiveScene().name;
+
+        // switch (sceneName)
+        // {
+        //     case NAME_SCENE_1:
+        //         PlayMusic("Chunky_Monkey");
+        //         break;
+        //     case NAME_SCENE_2:
+        //         PlayMusic("InfiniteDoors");
+        //         break;
+        //     case NAME_SCENE_3:
+        //         PlayMusic("Tiny_Blocks");
+        //         break;
+        //     default:
+        //         PlayMusic("Chunky_Monkey");
+        //         break;
+        // }
     }
 
     public void PlayMusic(string name)

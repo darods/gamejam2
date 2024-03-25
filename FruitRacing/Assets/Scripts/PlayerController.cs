@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class PlayerController : MonoBehaviour
     public GameObject[] points;
     public PositionManager master;
 
+    private const string NAME_SCENE_1 = "Level 1 Test";
+    private const string NAME_SCENE_2 = "Level 2 Test";
+    private const string NAME_SCENE_3 = "Level 3 Test";
+
     void Start()
     {
         
@@ -28,6 +33,24 @@ public class PlayerController : MonoBehaviour
         render = fruit.GetComponent<Renderer>();
         onFire = GameObject.Find("onFire");
         onFire.gameObject.SetActive(false);
+
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        switch (sceneName)
+        {
+            case NAME_SCENE_1:
+                AudioManager.Instance.PlayMusic("Chunky_Monkey");
+                break;
+            case NAME_SCENE_2:
+                AudioManager.Instance.PlayMusic("InfiniteDoors");
+                break;
+            case NAME_SCENE_3:
+                AudioManager.Instance.PlayMusic("Tiny_Blocks");
+                break;
+            default:
+                AudioManager.Instance.PlayMusic("Chunky_Monkey");
+                break;
+        }
 
     }
     void Update()
@@ -69,4 +92,6 @@ public class PlayerController : MonoBehaviour
     {
         playerDistance = Vector3.Distance(points[master.currentPoint].transform.position, transform.position);
     }
+
+
 }

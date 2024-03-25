@@ -19,8 +19,10 @@ public class RacingManager : MonoBehaviour
     void Update()
     {
         if(timesPLayer >= 2){
+            AudioManager.Instance.musicSource.Stop();
             SceneManager.LoadScene("Win");
         }else if(timesEnemy > 3){
+            AudioManager.Instance.musicSource.Stop();
             SceneManager.LoadScene("Lose");
         }
     }

@@ -72,7 +72,8 @@ public class PauseManager : MonoBehaviour
     public void RestartGame()
     {
         SetTimeScale(1.0f);
-        SceneManager.LoadScene("Level 1 Test");
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
     }
 
     private void SetTimeScale(float time)
