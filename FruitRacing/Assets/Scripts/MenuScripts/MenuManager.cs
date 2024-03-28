@@ -7,6 +7,7 @@ public class MenuManager : MonoBehaviour
 {
     Canvas canvasMenu1;
     Canvas canvasMenu2;
+    Canvas howToPlayCanvas;
 
     void Start()
     {
@@ -21,9 +22,14 @@ public class MenuManager : MonoBehaviour
             {
                 canvasMenu2 = canvas;
             }
+            else if (canvas.name == "HowToPlayCanvas")
+            {
+                howToPlayCanvas = canvas;
+            }
         }
 
         canvasMenu2.gameObject.SetActive(false);
+        howToPlayCanvas.gameObject.SetActive(false);
     }
 
     public void StartLevel1()
@@ -51,5 +57,23 @@ public class MenuManager : MonoBehaviour
     {
         canvasMenu2.gameObject.SetActive(false);
         canvasMenu1.gameObject.SetActive(true);
+    }
+
+    public void ShowHowToPlay()
+    {
+        howToPlayCanvas.gameObject.SetActive(true);
+        canvasMenu1.gameObject.SetActive(false);
+    }
+
+    public void BackToMenuFromHowToPlay()
+    {
+        howToPlayCanvas.gameObject.SetActive(false);
+        canvasMenu1.gameObject.SetActive(true);
+    }
+
+    public void GoToMenu2FromHowToPlay()
+    {
+        howToPlayCanvas.gameObject.SetActive(false);
+        canvasMenu2.gameObject.SetActive(true);
     }
 }

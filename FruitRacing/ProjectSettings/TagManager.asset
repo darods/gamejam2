@@ -7,6 +7,7 @@ TagManager:
   - powerUp
   - Goal
   - Enemy
+  - Ground
   layers:
   - Default
   - TransparentFX

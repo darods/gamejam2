@@ -23,10 +23,10 @@ public class PlayerController : MonoBehaviour
     private const string NAME_SCENE_1 = "Level 1 Test";
     private const string NAME_SCENE_2 = "Level 2 Test";
     private const string NAME_SCENE_3 = "Level 3 Test";
+    public Vector3 lastSafePosition;
 
     void Start()
     {
-        
         playerRb = GetComponent<Rigidbody>();
         focalPoint = GameObject.Find("Focal Point");
         fruit = GameObject.Find("coco");
@@ -51,8 +51,10 @@ public class PlayerController : MonoBehaviour
                 AudioManager.Instance.PlayMusic("Chunky_Monkey");
                 break;
         }
-
+        // Establecer la posición inicial como la última posición segura
+        lastSafePosition = transform.position;
     }
+
     void Update()
     {
         // Add force to player in direction of the focal point (and camera)
@@ -61,20 +63,36 @@ public class PlayerController : MonoBehaviour
         onFire.transform.position = transform.position;
         dustCloud.transform.position = transform.position;
         FindDistance();
+
     }
+
 
     private void OnTriggerEnter(Collider other)
+{
+    if (other.CompareTag("powerUp"))
     {
-            if (other.CompareTag("powerUp"))
-        {
-            gotPowerUp = true;
-            onFire.gameObject.SetActive(true);
-            dustCloud.Play();
-            Destroy(other.gameObject);
-            StartCoroutine(activatePowerUp());
-
-        }
+        HandlePowerUpCollision(other);
     }
+    else if (other.CompareTag("Ground"))
+    {
+        HandleGroundCollision();
+    }
+}
+
+private void HandlePowerUpCollision(Collider powerUpCollider)
+{
+    gotPowerUp = true;
+    onFire.gameObject.SetActive(true);
+    dustCloud.Play();
+    Destroy(powerUpCollider.gameObject);
+    StartCoroutine(activatePowerUp());
+}
+
+private void HandleGroundCollision()
+{
+    Debug.Log("El player colisionó con el Ground");
+    transform.position = lastSafePosition;
+}
 
     IEnumerator activatePowerUp()
     {
@@ -92,6 +110,4 @@ public class PlayerController : MonoBehaviour
     {
         playerDistance = Vector3.Distance(points[master.currentPoint].transform.position, transform.position);
     }
-
-
 }
