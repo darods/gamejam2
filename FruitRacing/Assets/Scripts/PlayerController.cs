@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
-    private float speed = 800;
+    private float speed = 2000;
     private GameObject focalPoint;
     private GameObject fruit;
     private Renderer render;
