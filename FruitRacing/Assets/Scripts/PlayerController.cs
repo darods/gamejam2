@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
     private const string NAME_SCENE_3 = "Level 3 Test";
     public Vector3 lastSafePosition;
 
+    private GameObject begningWall;
+
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
@@ -33,6 +35,8 @@ public class PlayerController : MonoBehaviour
         render = fruit.GetComponent<Renderer>();
         onFire = GameObject.Find("onFire");
         onFire.gameObject.SetActive(false);
+        begningWall = GameObject.Find("BeginingWall");
+
 
         string sceneName = SceneManager.GetActiveScene().name;
 
@@ -68,16 +72,21 @@ public class PlayerController : MonoBehaviour
 
 
     private void OnTriggerEnter(Collider other)
-{
-    if (other.CompareTag("powerUp"))
     {
-        HandlePowerUpCollision(other);
+        if (other.CompareTag("powerUp"))
+        {
+            HandlePowerUpCollision(other);
+        }
+        else if (other.CompareTag("Ground"))
+        {
+            HandleGroundCollision();
+        }
+        else if (other.CompareTag("EndWall"))
+        {
+                Debug.Log("touching ending wall");
+                begningWall.gameObject.SetActive(false);
+        }
     }
-    else if (other.CompareTag("Ground"))
-    {
-        HandleGroundCollision();
-    }
-}
 
 private void HandlePowerUpCollision(Collider powerUpCollider)
 {
