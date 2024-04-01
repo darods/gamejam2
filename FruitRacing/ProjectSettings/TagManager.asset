@@ -8,6 +8,7 @@ TagManager:
   - Goal
   - Enemy
   - Ground
+  - EndWall
   layers:
   - Default
   - TransparentFX

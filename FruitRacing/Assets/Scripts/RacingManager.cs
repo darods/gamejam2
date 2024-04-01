@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class RacingManager : MonoBehaviour
 {
-    public int timesPLayer = 0;
+    public int timesPlayer = 0;
     public int timesEnemy = 0;
     
     // Start is called before the first frame update
@@ -18,7 +18,7 @@ public class RacingManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(timesPLayer >= 2){
+        if(timesPlayer >= 1){
             AudioManager.Instance.musicSource.Stop();
             SceneManager.LoadScene("Win");
         }else if(timesEnemy > 3){
@@ -30,7 +30,7 @@ public class RacingManager : MonoBehaviour
     void OnTriggerEnter(Collider other){
         if(other.CompareTag("Player"))
         {
-            timesPLayer++;
+            timesPlayer++;
 
         }else if(other.CompareTag("Enemy"))
         {
