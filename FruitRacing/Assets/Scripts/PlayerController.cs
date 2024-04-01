@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour
 
     private GameObject begningWall;
 
+    public AudioClip powerupSound;
+    private AudioSource playerAudio;
+
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
@@ -36,6 +39,7 @@ public class PlayerController : MonoBehaviour
         onFire = GameObject.Find("onFire");
         onFire.gameObject.SetActive(false);
         begningWall = GameObject.Find("BeginingWall");
+        playerAudio = GetComponent<AudioSource>();
 
 
         string sceneName = SceneManager.GetActiveScene().name;
@@ -105,6 +109,7 @@ private void HandleGroundCollision()
 
     IEnumerator activatePowerUp()
     {
+        playerAudio.PlayOneShot(powerupSound, 1.0f);
         originalColor = render.material.color;
         speed *= 2; // multiply by 3 the speed
         render.material.color = Color.blue;
